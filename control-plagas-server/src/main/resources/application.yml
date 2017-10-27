@@ -24,8 +24,8 @@ spring:
 #        type:
 #          descriptor:
 #            sql: trace       
-logging:
-  level:
-    org:    
-      springframework:
-        security: debug         
+#logging:
+#  level:
+#    org:    
+#      springframework:
+#        security: debug         
