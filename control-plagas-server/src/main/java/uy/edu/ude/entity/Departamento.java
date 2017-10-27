@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Departamento {
@@ -12,6 +13,7 @@ public class Departamento {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
   @NotNull
+  @Size(max = 256)
   private String nombre;
 
   public int getId() {

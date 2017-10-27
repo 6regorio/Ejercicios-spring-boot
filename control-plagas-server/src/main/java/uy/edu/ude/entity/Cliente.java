@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
@@ -19,17 +20,22 @@ public class Cliente {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
   @NotNull
+  @Size(max = 256)
   private String nombre;
   @NotNull
+  @Size(max = 256)
   private String telefono;
   @NotNull
   @Email
+  @Size(max = 256)
   private String email;
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn
   private Departamento departamento;
   @NotNull
+  @Size(max = 256)
   private String direccion;
+
   public int getId() {
     return id;
   }
