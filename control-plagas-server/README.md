@@ -1,23 +1,23 @@
-#Servidor de control de plagas
-##Descripción
+# Servidor de control de plagas
+## Descripción
 Servidor de apoyo para Obligatorio 2017 de la asignatura "Programación de Aps. Distribuidas Java/.NET".  
 **Carrera**: Analista en Informática / Universidad de la Empresa. 
-##Compilación
+## Compilación
 Para generar el artefacto de la aplicación a partir del código fuente se requiere ejecutar el siguiente comando en la raiz:   
 `$ gradlew clean build`   
 Requiere Java 8.
-##Ejecución 
+## Ejecución 
 El jar generado en la compilación queda con el nombre "control-plagas-server-0.0.1-SNAPSHOT.jar" en la ruta build/lib. Su ejecución se hace con:   
 `$ java -jar control-plagas-server-0.0.1-SNAPSHOT.jar --server.port=XXXX`   
 Donde la opción *server.port* es opcional y se puede usar para especificar el puerto de publicación de la aplicación. El puerto por default es 8080.
 
-##Recursos disponibles
+## Recursos disponibles
 **Clientes**:   
 *URL*: http://localhost:8080/cliente/   
 **Departamentos**:   
 *URL*: http://localhost:8080/departamento
 
-##Usuarios y roles
+## Usuarios y roles
 Se tienen dos roles "**operario**" y "**vendedor**" con usuarios pre cargados.      
 ___
 Con rol "**vendedor**":    
@@ -36,7 +36,7 @@ Con rol "**operario**":
 *Usuario*: oper   
 *Contraseña*: pass       
 
-##Seguridad y recursos
+## Seguridad y recursos
 El acceso a los recursos está protegido por autenticación HTTP Basic. Las URL y métodos permitidos por rol se describen a continuación:
 
 *URL*: /cliente/**   
@@ -51,8 +51,8 @@ El acceso a los recursos está protegido por autenticación HTTP Basic. Las URL 
 *Métodos HTTP permitidos*: GET   
 *Rol*: **vendedor** y **operario**
 
-##Tipos de peticiones soportadas
-###GET (Select de registro)
+## Tipos de peticiones soportadas
+### GET (Select de registro)
 *Ejemplo de petición*:
 
 ```
@@ -84,7 +84,7 @@ Body (Objeto consultado):
 }
 ```
 
-###POST (Insert de registro)
+### POST (Insert de registro)
 *Ejemplo de petición*:   
 
 ```
@@ -124,7 +124,7 @@ Body (Objeto creado):
 }
 ```
 
-###PATCH (Update de campo puntual)
+### PATCH (Update de campo puntual)
 *Ejemplo de petición*:   
 
 ```
@@ -161,7 +161,7 @@ Body (Objeto actualizado):
 }
 ```
 
-###PUT (Update de todo un registro)
+### PUT (Update de todo un registro)
 *Ejemplo de petición*:   
 
 ```
@@ -202,7 +202,7 @@ Body (Objeto actualizado):
 }
 ```
 
-###DELETE (Borrado de registro)
+### DELETE (Borrado de registro)
 *Ejemplo de petición*:   
 
 ```
@@ -215,12 +215,12 @@ curl -X DELETE \
 Código HTTP: **204** No content     
 Body: Sin contenido  
 
-##Códigos HTTP adicionales soportados
+## Códigos HTTP adicionales soportados
 **404** Not found (Recurso no encontrado, ruta inválida)   
 **500** Internal Server Error (Operación Ilegal, Validación de tamaño de campos/Datos nulos/formato de email)   
 **401** Unauthorized (Acceso denegado, contraseña incorrecta, rol sin privilegios)   
 
-##Utilidades embebidas
+## Utilidades embebidas
 Una vez ejecutada la aplicación podra consultar las siguientes utilidades embebidas:   
 1. **HAL Browser**: Permite explorar los endpoint del servidor a través de navegación.  
 *URL Acceso*: [http://localhost:8080/browser/index.html#/](http://localhost:8080/browser/index.html#/)
