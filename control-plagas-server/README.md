@@ -240,4 +240,4 @@ Figura 1. Captura de Hal Browser
 ![](H2ConsoleLogin.png)   
 Figura 2. Login H2 Console   
 ![](H2ConsoleManager.png)   
-Figura 2. Manager H2 Console   
+Figura 3. Manager H2 Console   
