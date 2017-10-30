@@ -239,10 +239,11 @@ Figura 2. Login H2 Console
 ![](H2ConsoleManager.png)   
 Figura 3. Manager H2 Console   
 
+
+## Código fuente
+https://github.com/earth001/Ejercicios-spring-boot/tree/master/control-plagas-server
+
 ## Compilación
 Para generar el artefacto de la aplicación a partir del código fuente se requiere ejecutar el siguiente comando en la raiz:   
 `$ gradlew clean build`   
 Requiere Java 8.
-
-## Código fuente
-https://github.com/earth001/Ejercicios-spring-boot/tree/master/control-plagas-server
