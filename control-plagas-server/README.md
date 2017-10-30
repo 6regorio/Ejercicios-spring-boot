@@ -2,11 +2,8 @@
 ## Descripción
 Servidor de apoyo para Obligatorio 2017 de la asignatura "Programación de Aps. Distribuidas Java/.NET".  
 **Carrera**: Analista en Informática / Universidad de la Empresa. 
-## Compilación
-Para generar el artefacto de la aplicación a partir del código fuente se requiere ejecutar el siguiente comando en la raiz:   
-`$ gradlew clean build`   
-Requiere Java 8.
-## Ejecución 
+
+## Ejecución  (Requiere java 8)
 El jar generado en la compilación queda con el nombre "control-plagas-server-0.0.1-SNAPSHOT.jar" en la ruta build/lib. Su ejecución se hace con:   
 `$ java -jar control-plagas-server-0.0.1-SNAPSHOT.jar --server.port=XXXX`   
 Donde la opción *server.port* es opcional y se puede usar para especificar el puerto de publicación de la aplicación. El puerto por default es 8080.
@@ -40,7 +37,7 @@ Con rol "**operario**":
 El acceso a los recursos está protegido por autenticación HTTP Basic. Las URL y métodos permitidos por rol se describen a continuación:
 
 *URL*: /cliente/**   
-*Métodos HTTP permitidos*: POST, DELETE, PATCH, GET   
+*Métodos HTTP permitidos*: POST, DELETE, PUT, PATCH, GET   
 *Rol*: **vendedor**   
 
 *URL*: /cliente/**   
@@ -241,3 +238,11 @@ Figura 1. Captura de Hal Browser
 Figura 2. Login H2 Console   
 ![](H2ConsoleManager.png)   
 Figura 3. Manager H2 Console   
+
+## Compilación
+Para generar el artefacto de la aplicación a partir del código fuente se requiere ejecutar el siguiente comando en la raiz:   
+`$ gradlew clean build`   
+Requiere Java 8.
+
+## Código fuente
+https://github.com/earth001/Ejercicios-spring-boot/tree/master/control-plagas-server
