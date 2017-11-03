@@ -4,8 +4,8 @@ Servidor de apoyo para Obligatorio 2017 de la asignatura "Programación de Aps. 
 **Carrera**: Analista en Informática / Universidad de la Empresa. 
 
 ## Ejecución  (Requiere java 8)
-El jar generado en la compilación queda con el nombre "control-plagas-server-0.0.1-SNAPSHOT.jar" en la ruta build/lib. Su ejecución se hace con:   
-`$ java -jar control-plagas-server-0.0.1-SNAPSHOT.jar --server.port=XXXX`   
+El jar generado en la compilación queda con el nombre "control-plagas-server-0.0.2-SNAPSHOT.jar" en la ruta build/lib. Su ejecución se hace con:   
+`$ java -jar control-plagas-server-0.0.2-SNAPSHOT.jar --server.port=XXXX`   
 Donde la opción *server.port* es opcional y se puede usar para especificar el puerto de publicación de la aplicación. El puerto por default es 8080.
 
 ## Recursos disponibles
