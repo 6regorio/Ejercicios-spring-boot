@@ -48,6 +48,10 @@ El acceso a los recursos está protegido por autenticación HTTP Basic. Las URL 
 *Métodos HTTP permitidos*: GET   
 *Rol*: **vendedor** y **operario**
 
+*URL*: /usuario/**   
+*Métodos HTTP permitidos*: GET   
+*Rol*: **vendedor** y **operario**
+
 ## Tipos de peticiones soportadas
 ### GET (Select de registro)
 *Ejemplo de petición*:

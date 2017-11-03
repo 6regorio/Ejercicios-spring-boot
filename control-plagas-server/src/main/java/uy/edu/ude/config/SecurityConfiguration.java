@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import uy.edu.ude.constant.Roles;
+import uy.edu.ude.constant.Rol;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -16,11 +16,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     // @formatter:off
     auth.inMemoryAuthentication().
-        withUser("vendedor").password("Pass01.").roles(Roles.VENDEDOR).and().
-        withUser("vend").password("pass").roles(Roles.VENDEDOR).and().
-        withUser("operario").password("Pass02.").roles(Roles.OPERARIO).and().
-        withUser("oper").password("pass").roles(Roles.OPERARIO);
-        
+        withUser("vendedor").password("Pass01.").roles(Rol.VENDEDOR).and().
+        withUser("vend").password("pass").roles(Rol.VENDEDOR).and().
+        withUser("operario").password("Pass02.").roles(Rol.OPERARIO).and().
+        withUser("oper").password("pass").roles(Rol.OPERARIO);        
     // @formatter:on
   }
 
@@ -29,17 +28,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // @formatter:off
     httpSecurity.authorizeRequests()
         .antMatchers(HttpMethod.POST, "/cliente/**")
-          .hasRole(Roles.VENDEDOR)
+          .hasRole(Rol.VENDEDOR)
         .antMatchers(HttpMethod.PUT, "/cliente/**")
-          .hasRole(Roles.VENDEDOR)
+          .hasRole(Rol.VENDEDOR)
         .antMatchers(HttpMethod.DELETE, "/cliente/**")
-          .hasRole(Roles.VENDEDOR)
+          .hasRole(Rol.VENDEDOR)
         .antMatchers(HttpMethod.PATCH, "/cliente/**")
-          .hasRole(Roles.VENDEDOR)
+          .hasRole(Rol.VENDEDOR)
         .antMatchers(HttpMethod.GET, "/cliente/**")
-          .hasAnyRole(Roles.VENDEDOR, Roles.OPERARIO)
+          .hasAnyRole(Rol.VENDEDOR, Rol.OPERARIO)
         .antMatchers(HttpMethod.GET, "/departamento/**")
-          .hasAnyRole(Roles.VENDEDOR, Roles.OPERARIO)
+          .hasAnyRole(Rol.VENDEDOR, Rol.OPERARIO)
+        .antMatchers(HttpMethod.GET, "/usuario/**")
+          .hasAnyRole(Rol.VENDEDOR, Rol.OPERARIO)
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/browser/**").permitAll();
     // @formatter:on
