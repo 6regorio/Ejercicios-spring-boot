@@ -4,7 +4,6 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 public class Rol {
 
   @Id
-  @GeneratedValue
   private final Long id;
   @Enumerated(EnumType.STRING)
   private final RolConstant nombre;

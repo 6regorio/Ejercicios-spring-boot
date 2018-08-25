@@ -12,12 +12,14 @@ import javax.validation.constraints.NotNull;
 public class Departamento {
 
   @Id
-  private final Long id;
+  private Long id;
   @NotNull
-  private final String nombre;
+  private String nombre;
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
-  private final Estudiante estudiante;
+  private Estudiante estudiante;
+
+  public Departamento(){}
 
   public Departamento(final Long id, final String nombre, final Estudiante estudiante) {
     this.id = id;

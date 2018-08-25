@@ -3,31 +3,42 @@ package uy.edu.ude.classserver.entity;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
-@Embeddable
+@Entity
 public class Usuario {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private final Long id;
   @NotNull
   @Basic(optional = false)
-  private final String cedula;
+  private final String login;
   @NotNull
   @Basic(optional = false)
   private final char[] password;
   @ManyToMany
   private final Set<Rol> roles;
 
-  public Usuario(final String cedula, final char[] password,
+  public Usuario(final Long id, @NotNull final String login, @NotNull final char[] password,
     final Set<Rol> roles) {
-    this.cedula = cedula;
+    this.id = id;
+    this.login = login;
     this.password = password;
     this.roles = roles;
   }
 
-  public String getCedula() {
-    return cedula;
+  public Long getId() {
+    return id;
+  }
+
+  public String getLogin() {
+    return login;
   }
 
   public char[] getPassword() {
@@ -47,18 +58,19 @@ public class Usuario {
       return false;
     }
     Usuario usuario = (Usuario) o;
-    return Objects.equals(cedula, usuario.cedula);
+    return id == usuario.id;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cedula);
+    return Objects.hash(id);
   }
 
   @Override
   public String toString() {
     return "Usuario{" +
-      "cedula='" + cedula + '\'' +
+      "id=" + id +
+      ", login='" + login + '\'' +
       ", roles=" + roles +
       '}';
   }
