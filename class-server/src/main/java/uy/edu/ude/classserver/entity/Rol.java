@@ -1,6 +1,5 @@
 package uy.edu.ude.classserver.entity;
 
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,15 +10,27 @@ import javax.validation.constraints.NotNull;
 public class Rol {
 
   @Id
-  private final Long id;
+  private Long id;
   @Enumerated(EnumType.STRING)
-  private final RolConstant nombre;
+  private RolConstant nombre;
   @NotNull
-  private final String descripcion;
+  private String descripcion;
 
   public Rol(final Long id, final RolConstant nombre, final String descripcion) {
     this.id = id;
     this.nombre = nombre;
+    this.descripcion = descripcion;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setNombre(RolConstant nombre) {
+    this.nombre = nombre;
+  }
+
+  public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
   }
 
@@ -40,16 +51,16 @@ public class Rol {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Rol)) {
       return false;
     }
     Rol rol = (Rol) o;
-    return Objects.equals(id, rol.id);
+    return id != null && id.equals(rol.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return 31;
   }
 
   @Override

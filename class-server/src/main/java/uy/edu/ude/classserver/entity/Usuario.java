@@ -1,36 +1,67 @@
 package uy.edu.ude.classserver.entity;
 
-import java.util.Objects;
+import java.util.Arrays;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 @Entity
+@DynamicUpdate
 public class Usuario {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private final Long id;
+  private Long id;
   @NotNull
   @Basic(optional = false)
-  private final String login;
+  private String login;
   @NotNull
   @Basic(optional = false)
-  private final char[] password;
+  private char[] password;
   @ManyToMany
-  private final Set<Rol> roles;
+  private Set<Rol> roles;
+  @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @LazyToOne(LazyToOneOption.NO_PROXY)
+  private Estudiante estudiante;
 
   public Usuario(final Long id, @NotNull final String login, @NotNull final char[] password,
-    final Set<Rol> roles) {
+    final Estudiante estudiante, final Set<Rol> roles) {
     this.id = id;
     this.login = login;
     this.password = password;
     this.roles = roles;
+    this.estudiante = estudiante;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setLogin(String login) {
+    this.login = login;
+  }
+
+  public void setPassword(char[] password) {
+    this.password = password;
+  }
+
+  public void setRoles(Set<Rol> roles) {
+    this.roles = roles;
+  }
+
+  public void setEstudiante(Estudiante estudiante) {
+    this.estudiante = estudiante;
   }
 
   public Long getId() {
@@ -54,16 +85,16 @@ public class Usuario {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Usuario)) {
       return false;
     }
     Usuario usuario = (Usuario) o;
-    return id == usuario.id;
+    return id != null && id.equals(usuario.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return 31;
   }
 
   @Override
@@ -71,7 +102,9 @@ public class Usuario {
     return "Usuario{" +
       "id=" + id +
       ", login='" + login + '\'' +
+      ", password=" + Arrays.toString(password) +
       ", roles=" + roles +
+      ", estudiante=" + estudiante +
       '}';
   }
 }

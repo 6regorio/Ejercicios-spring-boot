@@ -5,28 +5,30 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
+@DynamicUpdate
 public class Estudiante {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private final Long id;
+  private Long id;
   @NotNull
-  private final String nombre;
+  private String nombre;
   @NotNull
-  private final String telefono;
+  private String telefono;
   @Email
   @NotNull
-  private final String email;
+  private String email;
   @NotNull
-  private final String direccion;
+  private String direccion;
   @OneToOne(fetch = FetchType.LAZY)
-  @MapsId
+  @JoinColumn(name = "usuario_id")
   private final Usuario usuario;
 
   public Estudiante(final Long id, @NotNull final String nombre,
@@ -39,6 +41,26 @@ public class Estudiante {
     this.email = email;
     this.direccion = direccion;
     this.usuario = usuario;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setDireccion(String direccion) {
+    this.direccion = direccion;
   }
 
   public Long getId() {
@@ -63,5 +85,34 @@ public class Estudiante {
 
   public Usuario getUsuario() {
     return usuario;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Estudiante)) {
+      return false;
+    }
+    Estudiante estudiante = (Estudiante) o;
+    return id != null && id.equals(estudiante.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return 31;
+  }
+
+  @Override
+  public String toString() {
+    return "Estudiante{" +
+      "id=" + id +
+      ", nombre='" + nombre + '\'' +
+      ", telefono='" + telefono + '\'' +
+      ", email='" + email + '\'' +
+      ", direccion='" + direccion + '\'' +
+      ", usuario=" + usuario +
+      '}';
   }
 }

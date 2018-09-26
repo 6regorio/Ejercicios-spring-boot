@@ -7,8 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
+@DynamicUpdate
 public class Departamento {
 
   @Id
@@ -19,14 +21,14 @@ public class Departamento {
   @MapsId
   private Estudiante estudiante;
 
-  public Departamento(){}
+  public Departamento() {
+  }
 
   public Departamento(final Long id, final String nombre, final Estudiante estudiante) {
     this.id = id;
     this.nombre = nombre;
     this.estudiante = estudiante;
   }
-
 
   public Long getId() {
     return id;
@@ -45,16 +47,16 @@ public class Departamento {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Departamento)) {
       return false;
     }
-    Departamento that = (Departamento) o;
-    return Objects.equals(id, that.id);
+    Departamento departamento = (Departamento) o;
+    return id != null && id.equals(departamento.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return 31;
   }
 
   @Override
