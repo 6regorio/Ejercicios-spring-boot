@@ -34,14 +34,11 @@ public class Usuario {
   @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @LazyToOne(LazyToOneOption.NO_PROXY)
   private Estudiante estudiante;
+  @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @LazyToOne(LazyToOneOption.NO_PROXY)
+  private Estudiante profesor;
 
-  public Usuario(final Long id, @NotNull final String login, @NotNull final char[] password,
-    final Estudiante estudiante, final Set<Rol> roles) {
-    this.id = id;
-    this.login = login;
-    this.password = password;
-    this.roles = roles;
-    this.estudiante = estudiante;
+  public Usuario() {
   }
 
   public void setId(Long id) {
@@ -64,6 +61,11 @@ public class Usuario {
     this.estudiante = estudiante;
   }
 
+
+  public void setProfesor(Estudiante profesor) {
+    this.profesor = profesor;
+  }
+
   public Long getId() {
     return id;
   }
@@ -78,6 +80,14 @@ public class Usuario {
 
   public Set<Rol> getRoles() {
     return roles;
+  }
+
+  public Estudiante getEstudiante() {
+    return estudiante;
+  }
+
+  public Estudiante getProfesor() {
+    return profesor;
   }
 
   @Override

@@ -11,10 +11,14 @@ public class Rol {
 
   @Id
   private Long id;
+  @NotNull
   @Enumerated(EnumType.STRING)
   private RolConstant nombre;
   @NotNull
   private String descripcion;
+
+  public Rol() {
+  }
 
   public Rol(final Long id, final RolConstant nombre, final String descripcion) {
     this.id = id;

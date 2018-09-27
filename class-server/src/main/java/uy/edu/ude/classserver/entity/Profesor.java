@@ -5,8 +5,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
@@ -16,11 +18,16 @@ public class Profesor {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotNull
   private String nombre;
+  @NotNull
   private String cargo;
   @OneToOne(fetch = FetchType.LAZY)
-  @MapsId
+  @JoinColumn(name = "usuario_id")
   private Usuario usuario;
+
+  public Profesor() {
+  }
 
   public Profesor(final Long id, final String nombre, final String cargo, final Usuario usuario) {
     this.id = id;
@@ -60,6 +67,7 @@ public class Profesor {
   public Usuario getUsuario() {
     return usuario;
   }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

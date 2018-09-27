@@ -29,18 +29,25 @@ public class Estudiante {
   private String direccion;
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "usuario_id")
-  private final Usuario usuario;
+  private Usuario usuario;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "departamento_id")
+  private Departamento departamento;
+
+  public Estudiante() {
+  }
 
   public Estudiante(final Long id, @NotNull final String nombre,
     @NotNull final String telefono,
     @Email @NotNull final String email, @NotNull final String direccion,
-    final Usuario usuario) {
+    final Usuario usuario, final Departamento departamento) {
     this.id = id;
     this.nombre = nombre;
     this.telefono = telefono;
     this.email = email;
     this.direccion = direccion;
     this.usuario = usuario;
+    this.departamento = departamento;
   }
 
   public void setId(Long id) {
@@ -87,6 +94,10 @@ public class Estudiante {
     return usuario;
   }
 
+  public Departamento getDepartamento() {
+    return departamento;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -112,6 +123,7 @@ public class Estudiante {
       ", telefono='" + telefono + '\'' +
       ", email='" + email + '\'' +
       ", direccion='" + direccion + '\'' +
+      ", departamento='" + departamento + '\'' +
       ", usuario=" + usuario +
       '}';
   }

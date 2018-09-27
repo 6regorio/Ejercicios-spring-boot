@@ -1,5 +1,5 @@
 package uy.edu.ude.classserver.entity;
 
 public enum RolConstant {
-  ESTUDIANTE, PROFESOR;
+  ROLE_ESTUDIANTE, ROLE_PROFESOR;
 }
