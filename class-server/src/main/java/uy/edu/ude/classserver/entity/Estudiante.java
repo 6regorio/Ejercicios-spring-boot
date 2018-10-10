@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @DynamicUpdate
@@ -27,11 +28,14 @@ public class Estudiante {
   private String email;
   @NotNull
   private String direccion;
+
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "usuario_id")
+  @NotNull
   private Usuario usuario;
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "departamento_id")
+  @NotNull
   private Departamento departamento;
 
   public Estudiante() {

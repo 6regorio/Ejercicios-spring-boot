@@ -1,20 +1,16 @@
 package uy.edu.ude.classserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Arrays;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 @Entity
 @DynamicUpdate
@@ -28,15 +24,10 @@ public class Usuario {
   private String login;
   @NotNull
   @Basic(optional = false)
+  @JsonIgnore
   private char[] password;
   @ManyToMany
   private Set<Rol> roles;
-  @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @LazyToOne(LazyToOneOption.NO_PROXY)
-  private Estudiante estudiante;
-  @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @LazyToOne(LazyToOneOption.NO_PROXY)
-  private Estudiante profesor;
 
   public Usuario() {
   }
@@ -57,15 +48,6 @@ public class Usuario {
     this.roles = roles;
   }
 
-  public void setEstudiante(Estudiante estudiante) {
-    this.estudiante = estudiante;
-  }
-
-
-  public void setProfesor(Estudiante profesor) {
-    this.profesor = profesor;
-  }
-
   public Long getId() {
     return id;
   }
@@ -80,14 +62,6 @@ public class Usuario {
 
   public Set<Rol> getRoles() {
     return roles;
-  }
-
-  public Estudiante getEstudiante() {
-    return estudiante;
-  }
-
-  public Estudiante getProfesor() {
-    return profesor;
   }
 
   @Override
@@ -114,7 +88,6 @@ public class Usuario {
       ", login='" + login + '\'' +
       ", password=" + Arrays.toString(password) +
       ", roles=" + roles +
-      ", estudiante=" + estudiante +
       '}';
   }
 }

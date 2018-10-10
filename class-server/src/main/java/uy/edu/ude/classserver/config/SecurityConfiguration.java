@@ -52,6 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .hasRole("PROFESOR")
       .antMatchers(HttpMethod.GET, "/departamento/**")
       .hasAnyRole("PROFESOR", "ESTUDIANTE")
+      .antMatchers(HttpMethod.POST, "/departamento/**")
+      .denyAll()
       .antMatchers("/h2-console/**").permitAll()
       .antMatchers("/browser/**").permitAll();
     httpSecurity.httpBasic();
