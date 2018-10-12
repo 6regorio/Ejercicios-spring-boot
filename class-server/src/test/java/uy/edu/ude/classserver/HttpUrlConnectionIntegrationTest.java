@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 import java.util.Scanner;
 import org.junit.Test;
 
@@ -132,7 +133,15 @@ public class HttpUrlConnectionIntegrationTest {
     httpURLConnection.setRequestMethod("DELETE");
     httpURLConnection.setRequestProperty("Content-Type", "application/json");
     httpURLConnection.setRequestProperty("charset", "utf-8");
-    httpURLConnection.setRequestProperty("authorization", "Basic cHJvZmVzb3I6cHJvZmVzb3I=");
+    //Generación de HTTP Basic encoding
+    String basicAuth = "Basic " +
+        Base64.getEncoder().encodeToString("profesor:profesor".getBytes());
+    httpURLConnection.setRequestProperty("Authorization", basicAuth);
+    //En Android se puede usar así:
+    //String basicAuth = "Basic " +
+    //Base64.encodeToString("user:password".getBytes(),Base64.NO_WRAP);
+
+    httpURLConnection.setRequestProperty("authorization", basicAuth);
 
     assertThat(httpURLConnection.getResponseCode()).isEqualTo(204);
   }
