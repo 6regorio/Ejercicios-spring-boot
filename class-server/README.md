@@ -234,7 +234,7 @@ Figura 1. Captura de Hal Browser
 *URL Acceso*: [http://localhost:8080/h2-console/](http://localhost:8080/h2-console/)   
 **Parámetros de conexión:**   
 *Driver*: org.h2.Driver   
-*JDBC URL*: jdbc:h2:mem:controldb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE   
+*JDBC URL*: jdbc:h2:mem:classdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE   
 *User Name*: sa   
 *Password*:   
 ![](H2ConsoleLogin.png)   
