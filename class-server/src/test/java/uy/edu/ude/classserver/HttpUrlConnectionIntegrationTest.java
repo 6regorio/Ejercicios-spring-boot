@@ -1,6 +1,7 @@
 package uy.edu.ude.classserver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -47,9 +48,10 @@ public class HttpUrlConnectionIntegrationTest {
     httpURLConnection.setRequestProperty("Content-Type", "application/json");
     httpURLConnection.setRequestProperty("charset", "utf-8");
     httpURLConnection.setRequestProperty("authorization", "Basic ZXN0dWRpYW50ZTplc3R1ZGlhbnRl");
-    OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream());
-    out.write(json);
-    out.close();
+
+    try (OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream())) {
+      out.write(json);
+    }
 
     assertThat(httpURLConnection.getResponseCode()).isEqualTo(403);
   }
@@ -71,9 +73,9 @@ public class HttpUrlConnectionIntegrationTest {
     httpURLConnection.setRequestProperty("Content-Type", "application/json");
     httpURLConnection.setRequestProperty("charset", "utf-8");
     httpURLConnection.setRequestProperty("authorization", "Basic cHJvZmVzb3I6cHJvZmVzb3I=");
-    OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream());
-    out.write(json);
-    out.close();
+    try (OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream())) {
+      out.write(json);
+    }
 
     try (Scanner in = new Scanner(httpURLConnection.getInputStream())) {
       while (in.hasNext()) {
@@ -81,6 +83,57 @@ public class HttpUrlConnectionIntegrationTest {
       }
     }
 
-    assertThat(result.toString()).isNotNull();
+    assertThat(httpURLConnection.getResponseCode()).isEqualTo(201);
+  }
+
+
+  @Test
+  public void givenProfesor_whenPutEstudiante_thenGetResponse200() throws IOException {
+    String json = " {"
+        + "    \"nombre\": \"CarlosHttp\","
+        + "    \"telefono\": \"09200000\","
+        + "    \"email\": \"carlos.http@test.com\","
+        + "    \"direccion\": \"Mi Casa http\","
+        + "    \"departamento\":\"http://localhost:8080/departamento/3\""
+        + "}";
+    StringBuffer result = new StringBuffer();
+    URL url = new URL("http://localhost:8080/estudiante/1");
+    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+    httpURLConnection.setDoOutput(true);
+    httpURLConnection.setRequestMethod("PUT");
+    httpURLConnection.setRequestProperty("Content-Type", "application/json");
+    httpURLConnection.setRequestProperty("charset", "utf-8");
+    httpURLConnection.setRequestProperty("authorization", "Basic cHJvZmVzb3I6cHJvZmVzb3I=");
+    try (OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream())) {
+      out.write(json);
+    }
+
+    try (Scanner in = new Scanner(httpURLConnection.getInputStream())) {
+      while (in.hasNext()) {
+        result.append(in.nextLine());
+      }
+    }
+
+    assertSoftly(softly -> {
+      try {
+        softly.assertThat(httpURLConnection.getResponseCode()).isEqualTo(200);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      softly.assertThat(result).isNotBlank();
+    });
+  }
+
+  @Test
+  public void givenProfesor_whenDeleteEstudiante_thenGetResponse204()
+      throws IOException {
+    URL url = new URL("http://localhost:8080/estudiante/1");
+    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+    httpURLConnection.setRequestMethod("DELETE");
+    httpURLConnection.setRequestProperty("Content-Type", "application/json");
+    httpURLConnection.setRequestProperty("charset", "utf-8");
+    httpURLConnection.setRequestProperty("authorization", "Basic cHJvZmVzb3I6cHJvZmVzb3I=");
+
+    assertThat(httpURLConnection.getResponseCode()).isEqualTo(204);
   }
 }

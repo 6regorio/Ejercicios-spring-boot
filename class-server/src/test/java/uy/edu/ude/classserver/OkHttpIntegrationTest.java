@@ -28,6 +28,20 @@ public class OkHttpIntegrationTest {
   }
 
   @Test
+  public void givenAuthUser_whenGetWrongUrl_thenGetResponse404() throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/departamentoxyz")
+        .header("Authorization", Credentials.basic("estudiante", "estudiante"))
+        .build();
+
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(404);
+    response.close();
+  }
+
+  @Test
   public void givenUnAuthUser_whenGetDepartamento_thenGetResponse401() throws IOException {
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
@@ -77,6 +91,111 @@ public class OkHttpIntegrationTest {
     Response response = client.newCall(request).execute();
 
     assertThat(response.code()).isEqualTo(201);
+    response.close();
+  }
+
+  @Test
+  public void givenProfesor_whenPostEstudianteWithInvalidEmail_thenGetResponse500()
+      throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    MediaType JSON
+        = MediaType.parse("application/json; charset=utf-8");
+    String json = " {"
+        + "    \"nombre\": \"Carlos3000\","
+        + "    \"telefono\": \"092651651\","
+        + "    \"email\": \"carlos2-test*\","
+        + "    \"direccion\": \"Mi Casa\","
+        + "    \"departamento\":\"http://localhost:8080/departamento/3\""
+        + "}";
+    RequestBody body = RequestBody.create(JSON, json);
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/estudiante")
+        .header("Authorization", Credentials.basic("profesor", "profesor"))
+        .post(body).build();
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(500);
+    response.close();
+  }
+
+  @Test
+  public void givenProfesor_whenPostEstudianteWithInvalidTelefono_thenGetResponse500()
+      throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    MediaType JSON
+        = MediaType.parse("application/json; charset=utf-8");
+    String json = " {"
+        + "    \"nombre\": \"Carlos3000\","
+        + "    \"telefono\": \"\","
+        + "    \"email\": \"carlos2@test.com\","
+        + "    \"direccion\": \"Mi Casa\","
+        + "    \"departamento\":\"http://localhost:8080/departamento/3\""
+        + "}";
+    RequestBody body = RequestBody.create(JSON, json);
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/estudiante")
+        .header("Authorization", Credentials.basic("profesor", "profesor"))
+        .post(body).build();
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(500);
+    response.close();
+  }
+
+  @Test
+  public void givenProfesor_whenPutEstudiante_thenGetResponse204()
+      throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    MediaType JSON
+        = MediaType.parse("application/json; charset=utf-8");
+    String json = " {"
+        + "    \"nombre\": \"CarlosUpdated\","
+        + "    \"telefono\": \"09200000\","
+        + "    \"email\": \"carlos.updated@test.com\","
+        + "    \"direccion\": \"Mi Casa Updated\","
+        + "    \"departamento\":\"http://localhost:8080/departamento/3\""
+        + "}";
+    RequestBody body = RequestBody.create(JSON, json);
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/estudiante/1")
+        .header("Authorization", Credentials.basic("profesor", "profesor"))
+        .put(body).build();
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(204);
+    response.close();
+  }
+
+  @Test
+  public void givenProfesor_whenPatchEstudiante_thenGetResponse200()
+      throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    MediaType JSON
+        = MediaType.parse("application/json; charset=utf-8");
+    String json = "{\"nombre\": \"Carlos\"}";
+    RequestBody body = RequestBody.create(JSON, json);
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/estudiante/1")
+        .header("Authorization", Credentials.basic("profesor", "profesor"))
+        .patch(body).build();
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(200);
+    response.close();
+  }
+
+  @Test
+  public void givenProfesor_whenDeleteEstudiante_thenGetResponse204()
+      throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/estudiante/1")
+        .header("Authorization", Credentials.basic("profesor", "profesor"))
+        .delete().build();
+
+    Response response = client.newCall(request).execute();
+
+    assertThat(response.code()).isEqualTo(204);
     response.close();
   }
 }

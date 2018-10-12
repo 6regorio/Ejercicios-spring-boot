@@ -8,10 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @DynamicUpdate
@@ -20,17 +20,21 @@ public class Estudiante {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotBlank
   @NotNull
   @Size(max = 256)
   private String nombre;
   @Size(max = 256)
   @NotNull
+  @NotBlank
   private String telefono;
   @Email
   @NotNull
+  @NotBlank
   @Size(max = 256)
   private String email;
   @NotNull
+  @NotBlank
   @Size(max = 256)
   private String direccion;
 
@@ -43,9 +47,9 @@ public class Estudiante {
   }
 
   public Estudiante(final Long id, @NotNull final String nombre,
-    @NotNull final String telefono,
-    @Email @NotNull final String email, @NotNull final String direccion,
-    final Departamento departamento) {
+      @NotNull final String telefono,
+      @Email @NotNull final String email, @NotNull final String direccion,
+      final Departamento departamento) {
     this.id = id;
     this.nombre = nombre;
     this.telefono = telefono;
@@ -118,12 +122,12 @@ public class Estudiante {
   @Override
   public String toString() {
     return "Estudiante{" +
-      "id=" + id +
-      ", nombre='" + nombre + '\'' +
-      ", telefono='" + telefono + '\'' +
-      ", email='" + email + '\'' +
-      ", direccion='" + direccion + '\'' +
-      ", departamento='" + departamento + '\'' +
-      '}';
+        "id=" + id +
+        ", nombre='" + nombre + '\'' +
+        ", telefono='" + telefono + '\'' +
+        ", email='" + email + '\'' +
+        ", direccion='" + direccion + '\'' +
+        ", departamento='" + departamento + '\'' +
+        '}';
   }
 }
