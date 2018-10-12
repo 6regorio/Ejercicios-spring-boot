@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
@@ -19,21 +20,19 @@ public class Profesor {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @NotNull
+  @Size(max = 256)
   private String nombre;
   @NotNull
+  @Size(max = 256)
   private String cargo;
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "usuario_id")
-  private Usuario usuario;
 
   public Profesor() {
   }
 
-  public Profesor(final Long id, final String nombre, final String cargo, final Usuario usuario) {
+  public Profesor(final Long id, final String nombre, final String cargo) {
     this.id = id;
     this.nombre = nombre;
     this.cargo = cargo;
-    this.usuario = usuario;
   }
 
   public void setId(Long id) {
@@ -48,10 +47,6 @@ public class Profesor {
     this.cargo = cargo;
   }
 
-  public void setUsuario(Usuario usuario) {
-    this.usuario = usuario;
-  }
-
   public Long getId() {
     return id;
   }
@@ -64,9 +59,6 @@ public class Profesor {
     return cargo;
   }
 
-  public Usuario getUsuario() {
-    return usuario;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -91,7 +83,6 @@ public class Profesor {
       "id=" + id +
       ", nombre='" + nombre + '\'' +
       ", cargo='" + cargo + '\'' +
-      ", usuario=" + usuario +
       '}';
   }
 }

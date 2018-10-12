@@ -10,7 +10,7 @@
   <packaging>jar</packaging>
 
   <name>class-server</name>
-  <description>Demo project for Spring Boot</description>
+  <description>Class server para obligatorio 2018</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>

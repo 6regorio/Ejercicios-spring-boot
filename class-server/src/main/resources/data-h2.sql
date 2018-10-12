@@ -46,15 +46,24 @@ values (2, 'ROLE_PROFESOR', 'Rol de profesor');
 insert into usuario (login, password)
 values ('estudiante', 'estudiante');
 insert into usuario (login, password)
+values ('est', 'est');
+insert into usuario (login, password)
 values ('profesor', 'profesor');
+insert into usuario (login, password)
+values ('prof', 'prof');
+
 --Datos roles usuarios
 insert into usuario_roles (usuario_id, roles_id)
 values (1, 1);
 insert into usuario_roles (usuario_id, roles_id)
-values (2, 2);
+values (2, 1);
+insert into usuario_roles (usuario_id, roles_id)
+values (3, 2);
+insert into usuario_roles (usuario_id, roles_id)
+values (4, 2);
 --Datos estudiante
-insert into estudiante (direccion, email, nombre, telefono, departamento_id, usuario_id)
-values ('Cerro Largo', 'estudiante@class.com', 'Adan C.', '092123123', 10, 1);
+insert into estudiante (direccion, email, nombre, telefono, departamento_id)
+values ('Cerro Largo', 'estudiante@class.com', 'Adan C.', '092123123', 10);
 --Datos profesor
-insert into profesor (cargo, nombre, usuario_id)
-values ('Asistente', 'David C.', 2);
+insert into profesor (cargo, nombre)
+values ('Asistente', 'David C.');

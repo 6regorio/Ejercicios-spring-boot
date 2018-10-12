@@ -1,4 +1,6 @@
 spring:
+  main:
+    banner-mode: "off"
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
