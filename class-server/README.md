@@ -12,9 +12,9 @@ Donde la opción *server.port* es opcional y se puede usar para especificar el p
 **Clientes**:   
 *URL*: http://localhost:8080/estudiante/   
 **Departamentos**:   
-*URL*: http://localhost:8080/departamento
-**Profesor**:   
-*URL*: http://localhost:8080/profesor
+*URL*: http://localhost:8080/departamento/
+**Usuario**:   
+*URL*: http://localhost:8080/usuario/
 
 
 ## Usuarios y roles

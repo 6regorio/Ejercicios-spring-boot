@@ -64,6 +64,3 @@ values (4, 2);
 --Datos estudiante
 insert into estudiante (direccion, email, nombre, telefono, departamento_id)
 values ('Cerro Largo', 'estudiante@class.com', 'Adan C.', '092123123', 10);
---Datos profesor
-insert into profesor (cargo, nombre)
-values ('Asistente', 'David C.');
