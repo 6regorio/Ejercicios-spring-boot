@@ -225,8 +225,8 @@ Una vez ejecutada la aplicación podra consultar las siguientes utilidades embeb
 1. **HAL Browser**: Permite explorar los endpoint del servidor a través de navegación.  
 *URL Acceso*: [http://localhost:8080/browser/index.html#/](http://localhost:8080/browser/index.html#/)
 Para acceder a los endpoints protegidos con HTTP Basic deberá agregar en los "Custom Request Headers" el valor:   
-Authorization: Basic dmVuZDpwYXNz    
-Donde "dmVuZDpwYXNz" es el Base64 de vend:pass.        
+Authorization: Basic cHJvZmVzb3I6cHJvZmVzb3I=    
+Donde "cHJvZmVzb3I6cHJvZmVzb3I=" es el Base64 de profesor:profesor.        
 ![](HalBrowser.png)  
 Figura 1. Captura de Hal Browser
    
