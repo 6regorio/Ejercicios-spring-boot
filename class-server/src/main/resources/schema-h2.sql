@@ -10,7 +10,8 @@ create table estudiante (
   nombre          varchar(255) not null,
   telefono        varchar(255) not null,
   departamento_id bigint,
-  primary key (id)
+  primary key (id),
+  unique key(email)
 );
 create table rol (
   id          bigint       not null,
