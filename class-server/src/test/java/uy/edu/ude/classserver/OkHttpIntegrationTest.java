@@ -1,6 +1,7 @@
 package uy.edu.ude.classserver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import java.io.IOException;
 import okhttp3.Credentials;
@@ -12,6 +13,28 @@ import okhttp3.Response;
 import org.junit.Test;
 
 public class OkHttpIntegrationTest {
+
+  @Test
+  public void givenAuthUser_whenGetUsuario_thenGetResponseOk() throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+        .url("http://localhost:8080/usuario")
+        .header("Authorization", Credentials.basic("estudiante", "estudiante"))
+        .build();
+    String rolExpected = "ROLE_ESTUDIANTE";
+
+    Response response = client.newCall(request).execute();
+
+    assertSoftly(softly -> {
+      softly.assertThat(response.code()).isEqualTo(200);
+      try {
+        softly.assertThat(response.body().string()).contains(rolExpected);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
+    response.close();
+  }
 
   @Test
   public void givenAuthUser_whenGetDepartamentos_thenGetResponseOk() throws IOException {
@@ -167,7 +190,7 @@ public class OkHttpIntegrationTest {
   }
 
   @Test
-  public void givenProfesor_whenPatchEstudiante_thenGetResponse200()
+  public void givenProfesor_whenPatchEstudiante_thenGetResponse204()
       throws IOException {
     OkHttpClient client = new OkHttpClient();
     MediaType JSON
@@ -180,7 +203,7 @@ public class OkHttpIntegrationTest {
         .patch(body).build();
     Response response = client.newCall(request).execute();
 
-    assertThat(response.code()).isEqualTo(200);
+    assertThat(response.code()).isEqualTo(204);
     response.close();
   }
 
